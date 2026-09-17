@@ -37,6 +37,20 @@ TOTALES_IMPRESOS = {
     "total": 330.50,
 }
 
+COMPARACION_ROWS = [
+    {
+        "producto_solicitado": "REVISAR",
+        "cantidad_solicitada": "REVISAR",
+        "cantidad_recibida": "",
+        "diferencia": "",
+        "estado": "REVISAR",
+        "observaciones": (
+            "No se pudo transcribir la lista solicitada (imágenes 8-11) "
+            "desde el contenido accesible en este entorno."
+        ),
+    }
+]
+
 
 def build_factura_sheet(workbook: Workbook) -> None:
     ws = workbook.active
@@ -90,7 +104,11 @@ def build_factura_sheet(workbook: Workbook) -> None:
     ws.cell(
         row=total_row + 4,
         column=1,
-        value="REVISAR: los totales calculados no coinciden con los impresos; faltan líneas por transcribir o validar en las fotos.",
+        value=(
+            "REVISAR: los totales calculados no coinciden con los impresos "
+            "(subtotal 287.39, IVA 43.11, total 330.50); faltan líneas por "
+            "transcribir o validar en las fotos."
+        ),
     )
 
     widths = {
@@ -127,14 +145,27 @@ def build_comparacion_sheet(workbook: Workbook) -> None:
             "Observaciones",
         ]
     )
+    for row in COMPARACION_ROWS:
+        ws.append(
+            [
+                row["producto_solicitado"],
+                row["cantidad_solicitada"],
+                row["cantidad_recibida"],
+                row["diferencia"],
+                row["estado"],
+                row["observaciones"],
+            ]
+        )
+
     ws.append(
         [
+            "Nota",
             "",
             "",
             "",
             "",
-            "",
-            "Se necesita la lista del pedido original para detectar faltantes.",
+            "La comparación se basa en la factura recibida y la lista proporcionada. "
+            "Las unidades por caja/paquete requieren confirmación cuando no coinciden.",
         ]
     )
 
