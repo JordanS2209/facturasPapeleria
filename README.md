@@ -30,4 +30,5 @@ Se generará/actualizará:
 1. Reemplaza en `generar_factura_excel.py` los productos por los datos visibles de las fotos.
 2. Si un dato no es legible, deja `REVISAR` en Observaciones (no inventar datos).
 3. Verifica la sección de comparación de totales calculados vs. totales impresos.
-4. Completa la hoja `Comparación` cuando tengas la lista del pedido original.
+4. Completa `COMPARACION_ROWS` con la lista solicitada para que la hoja `Comparación` marque completos, parciales o faltantes.
+5. Si la factura usa cajas/paquetes, conserva esa unidad y aclara en Observaciones cualquier diferencia de unidad.
